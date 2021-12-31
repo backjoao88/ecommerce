@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import userRouter from '../routes/api/v1/users';
+import userRouter from './api/v1/users';
+import sessionRouter from './api/v1/sessions';
 
-const router = Router();
+const routes = Router();
 
-router.use('users', userRouter);
+routes.use('/users', userRouter);
+routes.use('/sessions', sessionRouter);
 
-export default router;
+export default routes;

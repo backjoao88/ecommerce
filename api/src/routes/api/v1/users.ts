@@ -1,9 +1,11 @@
 import { Router } from 'express';
+import UserController from '../../../controllers/UserController';
 
-const userRouter = Router()
+const userRouter = Router();
 
-userRouter.get('/', (req, res, next) => {
-  return res.json({ msg: 'Eu sou lindo.' });
-});
+const userController = new UserController();
+
+userRouter.get('/', userController.index);
+userRouter.post('/', userController.create);
 
 export default userRouter;

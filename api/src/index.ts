@@ -1,12 +1,15 @@
 import express from 'express';
-import router from './routes/index'
+import cors from 'cors';
+import routes from './routes';
+import './database';
 
 const app = express();
 
-app.get('/users', (req, res, next) => {
-  return res.json({ err: 'Eu sou lindo' })
-});
+app.use(cors());
+app.use(express.json());
+
+app.use(routes);
 
 app.listen(3000, () => {
-  console.log('Servidor escutando na porta 3000.');
+  console.log('Server is listening on port 3000...');
 });
