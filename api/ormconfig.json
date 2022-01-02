@@ -5,20 +5,15 @@
   "username": "postgres",
   "password": "postgres",
   "database": "db",
-  "synchronize": true,
+  "synchronize": false,
   "logging": false,
   "entities": [
-     "src/models/**/*.{ts,js}"
+    "./src/modules/**/infra/typeorm/entities/*.ts"
   ],
   "migrations": [
-     "src/database/migrations/**/*.{ts,js}"
-  ],
-  "subscribers": [
-     "src/subscriber/**/*.{ts,js}"
+    "./src/shared/infra/typeorm/migrations/*.ts"
   ],
   "cli": {
-    "entitiesDir": "./src/models",
-    "migrationsDir": "./src/database/migrations",
-    "subscribersDir": "./src/subscriber"
- }
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  }
 }

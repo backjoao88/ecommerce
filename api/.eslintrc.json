@@ -28,6 +28,8 @@
     "no-unused-vars": "off",
     "import/no-unresolved": "off",
     "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
+    "no-empty-function": "off",
     "camelcase": "off",
     "import/extensions": [
       "error",
