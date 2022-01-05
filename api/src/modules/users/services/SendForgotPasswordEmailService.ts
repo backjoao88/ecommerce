@@ -1,7 +1,7 @@
 import path from 'path';
 import { injectable, inject } from 'tsyringe';
 
-import EtherealMailProvider from '@shared/container/MailProvider/EtherealMailProvider';
+import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUserRepository from '../infra/repositories/IUserRepository';
 import IUserTokensRepository from '../infra/repositories/IUserTokensRepository';
 
@@ -14,6 +14,9 @@ class SendForgotPasswordEmailService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
+
+    @inject('MailProvider')
+    private mailProvider: IMailProvider,
 
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
@@ -35,12 +38,19 @@ class SendForgotPasswordEmailService {
       'forgot_password.hbs',
     );
 
-    // GENERALIZAR
-    const etherealMailProvider = new EtherealMailProvider();
-
-    await etherealMailProvider.sendMail(user.email, '[Burg Circuitos] Recuperação de senha', {
-      file: forgotPasswordTemplate,
-      variables: { name: user.name, link: `https://localhost:3000/password/reset?token=${token}` },
+    await this.mailProvider.sendMail({
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: '[BURG CIRCUITO] Recuperação de Senha',
+      templateData: {
+        file: forgotPasswordTemplate,
+        variables: {
+          name: user.name,
+          link: `${process.env.APP_WEB_URL}/reset-password/?token=${token}`,
+        },
+      },
     });
   }
 }

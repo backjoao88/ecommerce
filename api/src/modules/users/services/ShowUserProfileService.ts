@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/ApiException';
+import ApiException from '@shared/errors/ApiException';
 import IUserRepository from '../infra/repositories/IUserRepository';
 
 import User from '../infra/typeorm/entities/User';
@@ -18,12 +18,10 @@ export default class ShowProfileService {
 
   public async execute({ id }: IRequestDTO): Promise<User> {
     const user = await this.userRepository.findById(id);
-
+    console.log(user);
     if (!user) {
-      throw new AppError('User not found.');
+      throw new ApiException('User not found.');
     }
-
-    // delete user.password;
 
     return user;
   }

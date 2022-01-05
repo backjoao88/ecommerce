@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
@@ -24,13 +25,18 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "no-console": "off",
+
     "import/prefer-default-export": "off",
     "no-unused-vars": "off",
     "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}],
     "class-methods-use-this": "off",
+    "array-callback-return": "off",
     "no-useless-constructor": "off",
     "no-empty-function": "off",
+    "no-undef": "off",
     "camelcase": "off",
+    "max-len": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

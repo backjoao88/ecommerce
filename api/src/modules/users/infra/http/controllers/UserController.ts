@@ -7,13 +7,13 @@ import ShowUserProfileService from '@modules/users/services/ShowUserProfileServi
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const {
-      name, email, password, permissions,
+      name, email, password, permissions, shop_id,
     } = request.body;
 
     const createUserService = container.resolve(CreateUserService);
 
     const newUser = await createUserService.execute({
-      name, email, password, permissions,
+      name, email, password, permissions, shop_id,
     });
 
     return response.json(newUser);

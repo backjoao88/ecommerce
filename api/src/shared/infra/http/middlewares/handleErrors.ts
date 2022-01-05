@@ -1,11 +1,20 @@
-import { Request, Response } from 'express';
-import ApiError from '@shared/errors/ApiException';
+import { Request, Response, NextFunction } from 'express';
+import ApiException from '@shared/errors/ApiException';
 
-function errorMiddleware(error: ApiError, request: Request, response: Response) {
-  if (error instanceof ApiError) {
-    return response.status(error.statusCode).json({ error: error.message });
+function errorMiddleware(err: ApiException, request: Request, response: Response, next: NextFunction) {
+  if (err instanceof ApiException) {
+    return response.status(err.statusCode).json({
+      status: 'error',
+      message: err.message,
+    });
   }
-  return response.status(500).json({ status: 'error', message: 'Internal server error.' });
+
+  console.log(err);
+
+  return response.status(500).json({
+    status: 'error',
+    message: 'Internal server error.',
+  });
 }
 
 export default errorMiddleware;

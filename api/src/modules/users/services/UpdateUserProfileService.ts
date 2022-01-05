@@ -1,8 +1,10 @@
 import { injectable, inject } from 'tsyringe';
 import { hash, compare } from 'bcryptjs';
-import ApiError from '@shared/errors/ApiException';
+import ApiException from '@shared/errors/ApiException';
 import User from '@modules/users/infra/typeorm/entities/User';
+import { differenceInHoursWithOptions } from 'date-fns/fp';
 import IUserRepository from '../infra/repositories/IUserRepository';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequestDTO {
   id: string;
@@ -17,6 +19,9 @@ export default class UpdateProfileService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
@@ -29,30 +34,27 @@ export default class UpdateProfileService {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new ApiError('User not found.');
+      throw new ApiException('User not found.');
     }
 
     const checkEmail = await this.userRepository.findByEmail(email);
 
     if (checkEmail && checkEmail.id !== id) {
-      throw new ApiError('This email is already used by another user.');
+      throw new ApiException('This email is already used by another user.');
     }
 
     if (password && !old_password) {
-      throw new ApiError('You need to inform the current password.');
+      throw new ApiException('You need to inform the current password.');
     }
 
     if (password && old_password) {
-      const checkOldPassword = await compare(
-        old_password,
-        user.password,
-      );
+      const checkOldPassword = await this.hashProvider.compareHash(password, old_password);
 
       if (!checkOldPassword) {
-        throw new ApiError('Wrong current password.');
+        throw new ApiException('Wrong current password.');
       }
 
-      user.password = await hash(password, 8);
+      user.password = await this.hashProvider.generateHash(password);
     }
 
     user.name = name;
