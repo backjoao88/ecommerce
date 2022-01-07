@@ -25,7 +25,9 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "no-console": "off",
-
+    "no-shadow": "off",
+    "consistent-return": "off",
+    "import/no-cycle": "off",
     "import/prefer-default-export": "off",
     "no-unused-vars": "off",
     "import/no-unresolved": "off",
