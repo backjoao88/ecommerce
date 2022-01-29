@@ -11,7 +11,7 @@ const shopController = new ShopController();
 
 shopRouter.post(
   '/',
-  ensureIsAuthenticated,
+  // ensureIsAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),

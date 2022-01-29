@@ -1,6 +1,7 @@
 import {
-  Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
+import Category from './Category';
 import Rating from './Rating';
 import Variation from './Variation';
 
@@ -29,6 +30,16 @@ class Product {
 
   @Column()
   category_id: string;
+
+  @ManyToOne(() => Category, (category) => category.products)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
+
+  @OneToMany(() => Rating, (rating) => rating.product, { eager: true })
+  ratings: Rating[]
+
+  @OneToMany(() => Variation, (variation) => variation.product, { cascade: true, eager: true })
+  variations: Variation[]
 
   @Column()
   shop_id: string;

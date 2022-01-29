@@ -1,5 +1,6 @@
 interface ICreateProductDTO{
   title: string;
+  description: string;
   available: boolean;
   price: number;
   price_promotion: number;

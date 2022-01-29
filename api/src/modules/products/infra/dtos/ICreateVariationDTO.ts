@@ -5,7 +5,7 @@ interface ICreateVariationDTO{
   price_promotion: number;
   quantity: number;
   blocked_quantity: number;
-  shipping_id: string;
+  shippingVariation_id: string;
   product_id: string;
   shop_id: string;
 }

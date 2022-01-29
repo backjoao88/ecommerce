@@ -8,7 +8,6 @@ interface IRequestDTO {
   quantity: number;
   price_unitary: number;
   variation_id: string;
-  product_id: string;
 }
 
 @injectable()
@@ -32,7 +31,6 @@ class CreateCartService {
       quantity: cartData.quantity,
       price_unitary: cartData.price_unitary,
       variation_id: cartData.variation_id,
-      product_id: cartData.product_id,
     });
 
     return response;

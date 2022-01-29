@@ -1,6 +1,7 @@
 import {
-  Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn,
+  Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, ManyToOne, JoinColumn,
 } from 'typeorm';
+import Product from './Product';
 
 @Entity('ratings')
 class Rating {
@@ -18,6 +19,10 @@ class Rating {
 
   @Column()
   product_id: string;
+
+  @ManyToOne(() => Product, (products) => products.ratings)
+  @JoinColumn({ name: 'product_id' })
+  product: Product;
 
   @Column()
   shop_id: string;

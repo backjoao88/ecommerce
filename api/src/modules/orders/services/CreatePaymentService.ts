@@ -4,13 +4,10 @@ import IPaymentRepository from '@modules/orders/infra/repositories/IPaymentRepos
 
 interface IRequestDTO {
   amount: number;
-  type: string;
   installments: number;
   status: string;
-  order_id: string;
+  type: string;
   card_id: string;
-  shipping_id: string;
-  shop_id: string;
 }
 
 @injectable()
@@ -26,8 +23,6 @@ class CreatePaymentService {
       installments: paymentData.installments,
       status: paymentData.status,
       type: paymentData.type,
-      order_id: paymentData.order_id,
-      shop_id: paymentData.shop_id,
       card_id: paymentData.card_id,
     });
 

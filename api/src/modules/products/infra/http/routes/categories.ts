@@ -17,6 +17,18 @@ categoryRouter.post(
     },
   }),
   categoryController.create,
+
+);
+
+categoryRouter.get(
+  '/',
+  // ensureIsAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  categoryController.show,
 );
 
 export default categoryRouter;

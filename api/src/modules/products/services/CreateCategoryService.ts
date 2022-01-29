@@ -16,7 +16,6 @@ class CreateCategoryService {
   ) {}
 
   public async execute(categoryData: IRequestDTO): Promise<Category> {
-    console.log(categoryData);
     const response = await this.categoryRepository.create({
       description: categoryData.description,
       code: categoryData.code,

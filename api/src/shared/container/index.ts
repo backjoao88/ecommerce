@@ -20,13 +20,22 @@ import CategoryRepository from '@modules/products/infra/typeorm/repositories/Cat
 
 import IRatingRepository from '@modules/products/infra/repositories/IRatingRepository';
 import RatingRepository from '@modules/products/infra/typeorm/repositories/RatingRepository';
+
 import IVariationRepository from '@modules/products/infra/repositories/IVariationRepository';
 import VariationRepository from '@modules/products/infra/typeorm/repositories/VariationRepository';
+
+import IProductRepository from '@modules/products/infra/repositories/IProductRepository';
+import ProductRepository from '@modules/products/infra/typeorm/repositories/ProductRepository';
+
+import IVariationShippingRepository from '@modules/products/infra/repositories/IVariationShippingRepository';
+import VariationShippingRepository from '@modules/products/infra/typeorm/repositories/VariationShippingRepository';
+import IPaymentRepository from '@modules/orders/infra/repositories/IPaymentRepository';
+import PaymentRepository from '@modules/orders/infra/typeorm/repositories/PaymentRepository';
 
 container.registerSingleton<IUserRepository>(
   'UserRepository',
   UserRepository,
-);
+);  
 
 container.registerSingleton<IUserTokensRepository>(
   'UserTokensRepository',
@@ -53,6 +62,11 @@ container.registerSingleton<ICategoryRepository>(
   CategoryRepository,
 );
 
+container.registerSingleton<IProductRepository>(
+  'ProductRepository',
+  ProductRepository,
+);
+
 container.registerSingleton<IRatingRepository>(
   'RatingRepository',
   RatingRepository,
@@ -61,4 +75,14 @@ container.registerSingleton<IRatingRepository>(
 container.registerSingleton<IVariationRepository>(
   'VariationRepository',
   VariationRepository,
+);
+
+container.registerSingleton<IVariationShippingRepository>(
+  'VariationShippingRepository',
+  VariationShippingRepository,
+);
+
+container.registerSingleton<IPaymentRepository>(
+  'PaymentRepository',
+  PaymentRepository,
 );

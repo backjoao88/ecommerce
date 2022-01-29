@@ -13,7 +13,7 @@ interface IRequestDTO {
   blocked_quantity: number
   product_id: string;
   shop_id: string;
-  shipping_id: string;
+  shippingVariation_id: string;
 }
 
 @injectable()
@@ -41,7 +41,7 @@ class CreateVariationService {
       description: variationData.description,
       product_id: variationData.product_id,
       quantity: variationData.quantity,
-      shipping_id: variationData.shipping_id,
+      shippingVariation_id: variationData.shippingVariation_id,
       shop_id: variationData.shop_id,
     });
 

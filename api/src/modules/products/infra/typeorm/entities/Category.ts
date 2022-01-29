@@ -1,6 +1,6 @@
 import Product from '@modules/products/infra/typeorm/entities/Product';
 import {
-  Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('categories')
@@ -16,6 +16,9 @@ class Category {
 
   @Column()
   available: boolean;
+
+  @OneToMany(() => Product, (product) => product.category, { eager: true })
+  products: Product[];
 
   @CreateDateColumn()
   created_at: Date;

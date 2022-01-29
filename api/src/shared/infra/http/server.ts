@@ -18,6 +18,6 @@ app.use(errors());
 app.use(routes);
 app.use(errorMiddleware);
 
-app.listen(3000, () => {
-  console.log('> The server is listening on port 3000');
+app.listen(3333, () => {
+   console.log('> The server is listening on port 3333');
 });

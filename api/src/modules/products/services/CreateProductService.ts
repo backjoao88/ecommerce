@@ -6,6 +6,7 @@ import Product from '../infra/typeorm/entities/Product';
 
 interface IRequestDTO {
   title: string;
+  description: string;
   price: number;
   price_promotion: number;
   sku: string;
@@ -32,6 +33,7 @@ class CreateProductService {
     const response = await this.productRepository.create({
       title: productData.title,
       price: productData.price,
+      description: productData.description,
       available: true,
       price_promotion: productData.price_promotion,
       sku: productData.sku,
